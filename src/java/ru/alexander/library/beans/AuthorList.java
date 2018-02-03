@@ -22,14 +22,14 @@ public class AuthorList {
         try {
             conn = Database.getConnection();
             stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM author");
+            rs = stmt.executeQuery("SELECT * FROM author ORDER BY fio");
             while (rs.next()) {
                 Author author = new Author();
                 author.setName(rs.getString("fio"));
                 this.authorList.add(author);
             }
 
-        } catch (NamingException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(AuthorList.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        finally {

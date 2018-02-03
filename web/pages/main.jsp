@@ -4,6 +4,7 @@
     Author     : Alex
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="ru.alexander.library.beans.Author"%>
 <%@page import="ru.alexander.library.beans.AuthorList"%>
 <%@page import="ru.alexander.library.testconnection.TestConnection"%>
@@ -21,13 +22,12 @@
 
 
             <div class="header">
-                
-                <img src="" alt="Место для логотипа" width="100%" height="80"/>
-                
-                <form class="search_form" name="search_form" action="#" method="POST">
-                    <img src="../images/search.jpg"/>
+
+                <img src="../images/library.png" alt="Логотип"/>
+
+                <form class="search_form" name="search_form" action="#" method="POST">                    
                     <input type="text" name="search_String" value="" size="100" />
-                    <input type="submit" value="Поиск" name="serch_button" />
+                    <input class="search_button" type="submit" value="Поиск" name="serch_button" />
                     <select name="search_option">
                         <option>Название</option>
                         <option>Автор</option>
@@ -39,17 +39,10 @@
             <div class="sidebar1">
                 <h4>Список авторов</h4>
                 <ul class="nav">
-                    <% AuthorList authorList = new AuthorList();
-                        for (Author author : authorList.getAuthors()) {
-                    %>
-                    <li>
-                        <a href="#">
-                            <%= author.getName()%>                            
-                        </a>
-                    </li>
-                    <%
-                        }
-                    %>
+                    <jsp:useBean id="authorList" scope="session" class="ru.alexander.library.beans.AuthorList" />
+                    <c:forEach var="author" items="${authorList.getAuthorList()}" >
+                        <li><a href="#">${author.name}</a></li>
+                        </c:forEach>
                 </ul>
 
             </div><!-- end .sidebar1 -->
