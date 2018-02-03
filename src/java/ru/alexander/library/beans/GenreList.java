@@ -11,7 +11,7 @@ import ru.alexander.library.db.Database;
 
 public class GenreList {
 
-    private ArrayList<Genre> genreList = new ArrayList<>();
+    private ArrayList<Genre> genreList = new ArrayList<Genre>();
 
     private ArrayList<Genre> getGenres() {
         Statement stmt = null;
@@ -21,30 +21,32 @@ public class GenreList {
             conn = Database.getConnection();
 
             stmt = conn.createStatement();
-            rs = stmt.executeQuery("select * from library.genre order by name");
+            rs = stmt.executeQuery("select * from genre order by name");
             while (rs.next()) {
                 Genre genre = new Genre();
                 genre.setName(rs.getString("name"));
+                genre.setId(rs.getLong("id"));
                 genreList.add(genre);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(GenreList.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (rs != null) {
-                    rs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(GenreList.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        } 
+//        finally {
+//            try {
+//                if (stmt != null) {
+//                    stmt.close();
+//                }
+//                if (rs != null) {
+//                    rs.close();
+//                }
+//                if (conn != null) {
+//                    conn.close();
+//                }
+//            } catch (SQLException ex) {
+//                Logger.getLogger(GenreList.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
 
         return genreList;
     }

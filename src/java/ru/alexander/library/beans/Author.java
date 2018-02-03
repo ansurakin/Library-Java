@@ -1,16 +1,26 @@
 package ru.alexander.library.beans;
 
 public class Author {
-    
-    private String name;
 
+    private String name;
+    private long id;
+    
     public Author() {
     }
 
-    public Author(String name) {
+    public Author(String name, long id) {
         this.name = name;
+        this.id = id;
     }
 
+    public long getId() {
+        return id;
+    }
+    
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }
