@@ -4,6 +4,7 @@
     Author     : Alex
 --%>
 
+<%@page import="ru.alexander.library.testconnection.TestConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,5 +17,12 @@
         <%= "Привет" %>
         <h3><%= request.getParameter("username") %></h3>
         <h3>${param["password"]}</h3>
+        
+        <%
+            TestConnection tc = new TestConnection();
+            tc.check();
+            
+        %>
+        
     </body>
 </html>
