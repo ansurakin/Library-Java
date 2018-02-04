@@ -7,17 +7,20 @@ package ru.alexander.library.servlets;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import ru.alexander.library.beans.Book;
 
 /**
  *
  * @author Tim
  */
-public class ShowImage extends HttpServlet {
+public class PdfContent extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -31,18 +34,20 @@ public class ShowImage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("image/jpeg");  
-        OutputStream out = response.getOutputStream();  
+        response.setContentType("application/pdf");
+        OutputStream out = response.getOutputStream();
         try {
             int index = Integer.valueOf(request.getParameter("index"));
-
-            ArrayList<Book> list = (ArrayList<Book>)request.getSession(false).getAttribute("currentBookList");
+          
+            
+            ArrayList<Book> list = (ArrayList<Book>) request.getSession(false).getAttribute("currentBookList");
             Book book = list.get(index);
-            response.setContentLength(book.getImage().length);
-            out.write(book.getImage());
-        }catch (Exception ex){
+            book.fillPdfContent();
+            response.setContentLength(book.getContent().length);
+            out.write(book.getContent());
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {            
+        } finally {
             out.close();
         }
     }

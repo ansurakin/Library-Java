@@ -14,17 +14,15 @@ public class Database {
     private static InitialContext ic;
     private static DataSource ds;
 
-    public static Connection getConnection(){
+    public static Connection getConnection() {
         try {
             ic = new InitialContext();
             ds = (DataSource) ic.lookup("jdbc/Library_java");
-            if (conn == null) {
-                conn = ds.getConnection();
-            }            
-        } catch (NamingException | SQLException ex) {
+            conn = ds.getConnection();
+        } catch (SQLException | NamingException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return conn;
     }
-
 }

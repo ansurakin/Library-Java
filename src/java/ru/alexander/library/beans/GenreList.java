@@ -32,21 +32,21 @@ public class GenreList {
         } catch (SQLException ex) {
             Logger.getLogger(GenreList.class.getName()).log(Level.SEVERE, null, ex);
         } 
-//        finally {
-//            try {
-//                if (stmt != null) {
-//                    stmt.close();
-//                }
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//                if (conn != null) {
-//                    conn.close();
-//                }
-//            } catch (SQLException ex) {
-//                Logger.getLogger(GenreList.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(GenreList.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
         return genreList;
     }
